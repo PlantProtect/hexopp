@@ -21,13 +21,13 @@
 
     <meta name="description" content="（一）如何创建maven项目  1本系列主要记录在javaee课上学习到的SpringBoot的知识点及遇到的问题。  1.创建maven项目项目管理工具，meven。源代码管理、测试、发布….. 1.1 maven项目目录结构12345678910|--src​      |--main   &#x2F;&#x2F;项目发布的源代码          |--java    &#x2F;&#x2F;项目的java代码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot">
+<meta property="og:title" content="SpringBoot （一）">
 <meta property="og:url" content="https://github.com/PlantProtect/hexopp/2023/03/04/Spring-Boot/index.html">
 <meta property="og:site_name" content="Push &amp; Pull Zoom">
 <meta property="og:description" content="（一）如何创建maven项目  1本系列主要记录在javaee课上学习到的SpringBoot的知识点及遇到的问题。  1.创建maven项目项目管理工具，meven。源代码管理、测试、发布….. 1.1 maven项目目录结构12345678910|--src​      |--main   &#x2F;&#x2F;项目发布的源代码          |--java    &#x2F;&#x2F;项目的java代码">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-04T13:29:24.000Z">
-<meta property="article:modified_time" content="2023-03-04T13:36:48.047Z">
+<meta property="article:modified_time" content="2023-03-17T04:44:43.122Z">
 <meta property="article:author" content="Q">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://github.com/PlantProtect/hexopp/2023/03/04/Spring-Boot/","path":"2023/03/04/Spring-Boot/","title":"Spring Boot"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://github.com/PlantProtect/hexopp/2023/03/04/Spring-Boot/","path":"2023/03/04/Spring-Boot/","title":"SpringBoot （一）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Spring Boot | Push & Pull Zoom</title>
+<title>SpringBoot （一） | Push & Pull Zoom</title>
   
 
 
@@ -118,7 +118,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/hexopp/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -167,12 +167,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Spring Boot | Push & Pull Zoom">
+      <meta itemprop="name" content="SpringBoot （一） | Push & Pull Zoom">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring Boot
+          SpringBoot （一）
         </h1>
 
         <div class="post-meta-container">
@@ -182,9 +182,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-03-04 21:29:24 / Modified: 21:36:48" itemprop="dateCreated datePublished" datetime="2023-03-04T21:29:24+08:00">2023-03-04</time>
+      <time title="Created: 2023-03-04 21:29:24" itemprop="dateCreated datePublished" datetime="2023-03-04T21:29:24+08:00">2023-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-03-17 12:44:43" itemprop="dateModified" datetime="2023-03-17T12:44:43+08:00">2023-03-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,6 +317,58 @@
 
 <ul>
 <li>study 代表服务器上的study项目</li>
+</ul>
+</li>
+<li><ul>
+<li>application.yaml (实验二)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8081</span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /study</span><br><span class="line"> //服务器端定义</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://localhost:3306/test?                    serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">    //数据库连接</span><br><span class="line">   </span><br><span class="line">    username: root</span><br><span class="line">    password: 123456</span><br><span class="line">  thymeleaf:</span><br><span class="line">    cache: false</span><br><span class="line">    encoding: UTF-8</span><br><span class="line">    mode: HTML5</span><br><span class="line">    suffix: .html</span><br><span class="line">    prefix: classpath:/templates/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>server</p>
+</li>
+<li><p>spring:</p>
+<ul>
+<li><p>database  &#x2F;&#x2F;定义JDBC连接MYSQL数据库</p>
+<ul>
+<li><p>driver-class-name：JDBC的驱动类</p>
+</li>
+<li><p>url：连接字符串</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/test?               serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>jdbc:mysql:协议名</li>
+<li>localhost：MySQl数据库服务器的IP地址</li>
+<li>3306：安装数据库时的设置的端口号</li>
+<li>test：目标数据库（test数据库）</li>
+<li>serverTimezone：数据库的时区信息（GMT%2B8&lt;&#x3D;&#x3D; GMT 8,东8区)</li>
+<li>characterEncoding：编码集UTF8,unicode编码</li>
+<li>useSSL：是否使用SSL加密协议</li>
+</ul>
+</li>
+<li><p>username：用户名</p>
+</li>
+<li><p>root：密码</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>thymeleaf: &#x2F;&#x2F;定义模板页面文字</p>
+<ul>
+<li>cache：是否启动页面缓存（缓存，只能判断存在还是不存在，无法判断页面是否修改，所以在开发时一般关闭）F5是刷新，ctrl+F5是强制刷新，系统将服务器端所有资源重新下载。</li>
+<li>encoding：thymeleaf页面的编码方式</li>
+<li>mode：HTML5标准</li>
+<li>suffix、prefix：后缀和前缀 &#x3D;&#x3D;&gt; 对哪些文件启动Thymeleaf模板引擎<ul>
+<li>对classpath:&#x2F;templates&#x2F;目录下，以.html结尾的文件执行thymeleaf模板</li>
+<li>classes目录是编译后产生的文件，在target文件夹下（target是编译后的文件夹）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">suffix: .html</span><br><span class="line">prefix: classpath:/templates/</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>

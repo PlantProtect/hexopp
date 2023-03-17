@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hexopp/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/hexopp/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/hexopp/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/hexopp/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/hexopp/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"github.com","root":"/hexopp/","images":"/hexopp/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/hexopp/js/config.js"></script>
+
+    <meta name="description" content="1.MVC模型 M：model，模型层，和数据库打交道。《&#x3D;&#x3D;MyBatis V：view，视图层。用户看到的页面结果。 《&#x3D;&#x3D; Thymeleafs模板语言 C：controller，控制层。实现业务逻辑：数据的处理和页面的跳转。《&#x3D;&#x3D;Spring MVC  2.RequestMapping注解(Annotation)基于注解驱动的开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot （二） MVC">
+<meta property="og:url" content="https://github.com/PlantProtect/hexopp/2023/03/17/SpringBoot-MVC/index.html">
+<meta property="og:site_name" content="Push &amp; Pull Zoom">
+<meta property="og:description" content="1.MVC模型 M：model，模型层，和数据库打交道。《&#x3D;&#x3D;MyBatis V：view，视图层。用户看到的页面结果。 《&#x3D;&#x3D; Thymeleafs模板语言 C：controller，控制层。实现业务逻辑：数据的处理和页面的跳转。《&#x3D;&#x3D;Spring MVC  2.RequestMapping注解(Annotation)基于注解驱动的开发">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-17T04:43:55.000Z">
+<meta property="article:modified_time" content="2023-03-17T04:45:28.638Z">
+<meta property="article:author" content="Q">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://github.com/PlantProtect/hexopp/2023/03/17/SpringBoot-MVC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://github.com/PlantProtect/hexopp/2023/03/17/SpringBoot-MVC/","path":"2023/03/17/SpringBoot-MVC/","title":"SpringBoot （二） MVC"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringBoot （二） MVC | Push & Pull Zoom</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/hexopp/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/hexopp/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Push & Pull Zoom</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-MVC%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">1.MVC模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RequestMapping%E6%B3%A8%E8%A7%A3-Annotation"><span class="nav-number">2.</span> <span class="nav-text">2.RequestMapping注解(Annotation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%80%E4%B9%88%E6%98%AFAnnotation%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">3.什么是Annotation注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Controller%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.@Controller注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Restful%E9%A3%8E%E6%A0%BC"><span class="nav-number">5.</span> <span class="nav-text">5.Restful风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-RequestMapping%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">6.@RequestMapping请求参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 请求参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E5%9C%A8-RequestMapping%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 在@RequestMapping中获取请求参数</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Q</p>
+  <div class="site-description" itemprop="description">Love & Share & Freedom</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/hexopp/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/PlantProtect/hexopp/2023/03/17/SpringBoot-MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hexopp/images/avatar.gif">
+      <meta itemprop="name" content="Q">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Push & Pull Zoom">
+      <meta itemprop="description" content="Love & Share & Freedom">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringBoot （二） MVC | Push & Pull Zoom">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot （二） MVC
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-03-17 12:43:55 / Modified: 12:45:28" itemprop="dateCreated datePublished" datetime="2023-03-17T12:43:55+08:00">2023-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/hexopp/categories/SpringBoot%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">SpringBoot笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-MVC模型"><a href="#1-MVC模型" class="headerlink" title="1.MVC模型"></a>1.MVC模型</h3><ul>
+<li>M：model，模型层，和数据库打交道。《&#x3D;&#x3D;MyBatis</li>
+<li>V：view，视图层。用户看到的页面结果。 《&#x3D;&#x3D; Thymeleafs模板语言</li>
+<li>C：controller，控制层。实现业务逻辑：数据的处理和页面的跳转。《&#x3D;&#x3D;Spring MVC</li>
+</ul>
+<h3 id="2-RequestMapping注解-Annotation"><a href="#2-RequestMapping注解-Annotation" class="headerlink" title="2.RequestMapping注解(Annotation)"></a>2.RequestMapping注解(Annotation)</h3><p>基于注解驱动的开发</p>
+<ul>
+<li><p>将用户的url地址，与控制器中某个方法映射（Mapping）起来</p>
+</li>
+<li><p>多个request映射请求，可以映射同一个方法，一个请求不能映射多个方法</p>
+</li>
+<li><p>映射过程中，可以使用通配符（？，*）</p>
+</li>
+<li><p>映射可以是多级映射</p>
+</li>
+<li><p>&#96;&#96;&#96;http<br><a target="_blank" rel="noopener" href="http://localhost:8080/study/hello/h1">http://localhost:8080/study/hello/h1</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/study/admin/user/edit">http://localhost:8080/study/admin/user/edit</a><br>即restful风格<br><a target="_blank" rel="noopener" href="http://localhoost:8080/study/client/book/buy">http://localhoost:8080/study/client/book/buy</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```shell</span><br><span class="line">@Controller</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&quot;hello1&quot;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>@RequestMapping(“hello1”)  映射关系，当输入<a target="_blank" rel="noopener" href="http://localhost:8080/study/hello1">http://localhost:8080/study/hello1</a> 中的hello1</p>
+<p> @ResponseBody 响应体 返回的内容</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="meta">@RequestMapping(&quot;hello2&quot;)</span></span><br><span class="line">  <span class="keyword">public</span>  String <span class="title function_">hello2</span><span class="params">()</span>&#123;</span><br><span class="line">      String str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> ;i &lt;=<span class="number">5</span> ; i++)&#123;</span><br><span class="line">          str += <span class="string">&quot;&lt;h&quot;</span>+i+<span class="string">&quot;&gt;Hello,world!&lt;/h&quot;</span>+i+<span class="string">&quot;&gt;&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：RequestMapping(“xx”)  映射关系只能一个控制器（controller）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map <span class="string">&#x27;helloController&#x27;</span> method </span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello1()</span><br><span class="line">to &#123; /hi&#125;: There is already <span class="string">&#x27;helloController&#x27;</span> bean method</span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello3() mapped.</span><br></pre></td></tr></table></figure>
+
+<p>但是可以多个url地址映射同一个controller方法：即h1和h3都可以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h？&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>h？ 代表h后面放任意一个字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h*&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>*：表示0个或者多个字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(&quot;hello/h2&quot;)</span><br><span class="line">public String hello6()&#123;</span><br><span class="line">    return  &quot;Hello, world!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表示路径分级了，study&#x2F;hello&#x2F;h2</p>
+<p>另一种多级路径，可以直接在controller下面写一个requestMapping，表示所有的请求方法前面都加一个映射关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;hello&quot;)  //在此类的基础上，再增加一个级别，即所有的路径需要再加入一个hello</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-什么是Annotation注解"><a href="#3-什么是Annotation注解" class="headerlink" title="3.什么是Annotation注解"></a>3.什么是Annotation注解</h3><p>Java8引入的重要技术，</p>
+<h3 id="4-Controller注解"><a href="#4-Controller注解" class="headerlink" title="4.@Controller注解"></a>4.@Controller注解</h3><ul>
+<li><p>Spring;弹簧，核心技术：依赖注入，控制翻转</p>
+</li>
+<li><p>使用controller注解的类，在应用程序启动时，会被&#x3D;&#x3D;自动注入&#x3D;&#x3D;到spring的容器中</p>
+</li>
+</ul>
+<h3 id="5-Restful风格"><a href="#5-Restful风格" class="headerlink" title="5.Restful风格"></a>5.Restful风格</h3><ul>
+<li><p>前后端分离开发</p>
+</li>
+<li><p>基于切片的开发</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/admin/**/*  &lt;==控制所有的admin下的所有请求</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/**/* del   &lt;==控制所有的删除请求</span><br></pre></td></tr></table></figure>
+
+<p>用于定义url请求的风格（多级映射）</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/hello/h1</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/admin/user/edit</span><br><span class="line">即restful风格</span><br><span class="line">http://localhoost:8080/study/client/book/buy</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-RequestMapping请求参数"><a href="#6-RequestMapping请求参数" class="headerlink" title="6.@RequestMapping请求参数"></a>6.@RequestMapping请求参数</h3><h4 id="6-1-请求参数"><a href="#6-1-请求参数" class="headerlink" title="6.1 请求参数"></a>6.1 请求参数</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/hello2/h1?empno=1000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在URL中“？”后面的部分，是请求参数</p>
+</li>
+<li><p>使用键值对的方式</p>
+<ul>
+<li><p>等号左边是key</p>
+</li>
+<li><p>等号右边是value</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empno=1000</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>如果有多个请求参数，则使用&#x3D;&#x3D;&amp;&#x3D;&#x3D;进行切割</p>
+<ul>
+<li>四个参数：empno、 name、 hiredate、 sal</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empno=1000&amp;ename=qyc&amp;hiredate=2022-4-5&amp;sal=8000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>url参数的值，都是&#x3D;&#x3D;字符串&#x3D;&#x3D;</p>
+</li>
+</ul>
+<h4 id="6-2-在-RequestMapping中获取请求参数"><a href="#6-2-在-RequestMapping中获取请求参数" class="headerlink" title="6.2 在@RequestMapping中获取请求参数"></a>6.2 在@RequestMapping中获取请求参数</h4>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/hexopp/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hexopp/2023/03/14/%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F/" rel="prev" title="什么是服务器、网站服务器、文件服务器？">
+                  <i class="fa fa-chevron-left"></i> 什么是服务器、网站服务器、文件服务器？
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Q</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/hexopp/js/comments.js"></script><script src="/hexopp/js/utils.js"></script><script src="/hexopp/js/motion.js"></script><script src="/hexopp/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

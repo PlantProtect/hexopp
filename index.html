@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/hexopp/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -140,6 +140,172 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://github.com/PlantProtect/hexopp/2023/03/17/SpringBoot-MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/hexopp/images/avatar.gif">
+      <meta itemprop="name" content="Q">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Push & Pull Zoom">
+      <meta itemprop="description" content="Love & Share & Freedom">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Push & Pull Zoom">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/hexopp/2023/03/17/SpringBoot-MVC/" class="post-title-link" itemprop="url">SpringBoot （二） MVC</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-03-17 12:43:55 / Modified: 12:45:28" itemprop="dateCreated datePublished" datetime="2023-03-17T12:43:55+08:00">2023-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/hexopp/categories/SpringBoot%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">SpringBoot笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="1-MVC模型"><a href="#1-MVC模型" class="headerlink" title="1.MVC模型"></a>1.MVC模型</h3><ul>
+<li>M：model，模型层，和数据库打交道。《&#x3D;&#x3D;MyBatis</li>
+<li>V：view，视图层。用户看到的页面结果。 《&#x3D;&#x3D; Thymeleafs模板语言</li>
+<li>C：controller，控制层。实现业务逻辑：数据的处理和页面的跳转。《&#x3D;&#x3D;Spring MVC</li>
+</ul>
+<h3 id="2-RequestMapping注解-Annotation"><a href="#2-RequestMapping注解-Annotation" class="headerlink" title="2.RequestMapping注解(Annotation)"></a>2.RequestMapping注解(Annotation)</h3><p>基于注解驱动的开发</p>
+<ul>
+<li><p>将用户的url地址，与控制器中某个方法映射（Mapping）起来</p>
+</li>
+<li><p>多个request映射请求，可以映射同一个方法，一个请求不能映射多个方法</p>
+</li>
+<li><p>映射过程中，可以使用通配符（？，*）</p>
+</li>
+<li><p>映射可以是多级映射</p>
+</li>
+<li><p>&#96;&#96;&#96;http<br><a target="_blank" rel="noopener" href="http://localhost:8080/study/hello/h1">http://localhost:8080/study/hello/h1</a></p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/study/admin/user/edit">http://localhost:8080/study/admin/user/edit</a><br>即restful风格<br><a target="_blank" rel="noopener" href="http://localhoost:8080/study/client/book/buy">http://localhoost:8080/study/client/book/buy</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```shell</span><br><span class="line">@Controller</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&quot;hello1&quot;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>@RequestMapping(“hello1”)  映射关系，当输入<a target="_blank" rel="noopener" href="http://localhost:8080/study/hello1">http://localhost:8080/study/hello1</a> 中的hello1</p>
+<p> @ResponseBody 响应体 返回的内容</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="meta">@RequestMapping(&quot;hello2&quot;)</span></span><br><span class="line">  <span class="keyword">public</span>  String <span class="title function_">hello2</span><span class="params">()</span>&#123;</span><br><span class="line">      String str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> ;i &lt;=<span class="number">5</span> ; i++)&#123;</span><br><span class="line">          str += <span class="string">&quot;&lt;h&quot;</span>+i+<span class="string">&quot;&gt;Hello,world!&lt;/h&quot;</span>+i+<span class="string">&quot;&gt;&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：RequestMapping(“xx”)  映射关系只能一个控制器（controller）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map <span class="string">&#x27;helloController&#x27;</span> method </span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello1()</span><br><span class="line">to &#123; /hi&#125;: There is already <span class="string">&#x27;helloController&#x27;</span> bean method</span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello3() mapped.</span><br></pre></td></tr></table></figure>
+
+<p>但是可以多个url地址映射同一个controller方法：即h1和h3都可以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h？&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>h？ 代表h后面放任意一个字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h*&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>*：表示0个或者多个字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(&quot;hello/h2&quot;)</span><br><span class="line">public String hello6()&#123;</span><br><span class="line">    return  &quot;Hello, world!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表示路径分级了，study&#x2F;hello&#x2F;h2</p>
+<p>另一种多级路径，可以直接在controller下面写一个requestMapping，表示所有的请求方法前面都加一个映射关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;hello&quot;)  //在此类的基础上，再增加一个级别，即所有的路径需要再加入一个hello</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-什么是Annotation注解"><a href="#3-什么是Annotation注解" class="headerlink" title="3.什么是Annotation注解"></a>3.什么是Annotation注解</h3><p>Java8引入的重要技术，</p>
+<h3 id="4-Controller注解"><a href="#4-Controller注解" class="headerlink" title="4.@Controller注解"></a>4.@Controller注解</h3><ul>
+<li><p>Spring;弹簧，核心技术：依赖注入，控制翻转</p>
+</li>
+<li><p>使用controller注解的类，在应用程序启动时，会被&#x3D;&#x3D;自动注入&#x3D;&#x3D;到spring的容器中</p>
+</li>
+</ul>
+<h3 id="5-Restful风格"><a href="#5-Restful风格" class="headerlink" title="5.Restful风格"></a>5.Restful风格</h3><ul>
+<li><p>前后端分离开发</p>
+</li>
+<li><p>基于切片的开发</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/admin/**/*  &lt;==控制所有的admin下的所有请求</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/**/* del   &lt;==控制所有的删除请求</span><br></pre></td></tr></table></figure>
+
+<p>用于定义url请求的风格（多级映射）</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/hello/h1</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/admin/user/edit</span><br><span class="line">即restful风格</span><br><span class="line">http://localhoost:8080/study/client/book/buy</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-RequestMapping请求参数"><a href="#6-RequestMapping请求参数" class="headerlink" title="6.@RequestMapping请求参数"></a>6.@RequestMapping请求参数</h3><h4 id="6-1-请求参数"><a href="#6-1-请求参数" class="headerlink" title="6.1 请求参数"></a>6.1 请求参数</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/study/hello2/h1?empno=1000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在URL中“？”后面的部分，是请求参数</p>
+</li>
+<li><p>使用键值对的方式</p>
+<ul>
+<li><p>等号左边是key</p>
+</li>
+<li><p>等号右边是value</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empno=1000</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>如果有多个请求参数，则使用&#x3D;&#x3D;&amp;&#x3D;&#x3D;进行切割</p>
+<ul>
+<li>四个参数：empno、 name、 hiredate、 sal</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">empno=1000&amp;ename=qyc&amp;hiredate=2022-4-5&amp;sal=8000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>url参数的值，都是&#x3D;&#x3D;字符串&#x3D;&#x3D;</p>
+</li>
+</ul>
+<h4 id="6-2-在-RequestMapping中获取请求参数"><a href="#6-2-在-RequestMapping中获取请求参数" class="headerlink" title="6.2 在@RequestMapping中获取请求参数"></a>6.2 在@RequestMapping中获取请求参数</h4>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -535,7 +701,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/hexopp/2023/03/04/Spring-Boot/" class="post-title-link" itemprop="url">Spring Boot</a>
+          <a href="/hexopp/2023/03/04/Spring-Boot/" class="post-title-link" itemprop="url">SpringBoot （一）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -545,9 +711,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-03-04 21:29:24 / Modified: 21:36:48" itemprop="dateCreated datePublished" datetime="2023-03-04T21:29:24+08:00">2023-03-04</time>
+      <time title="Created: 2023-03-04 21:29:24" itemprop="dateCreated datePublished" datetime="2023-03-04T21:29:24+08:00">2023-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-03-17 12:44:43" itemprop="dateModified" datetime="2023-03-17T12:44:43+08:00">2023-03-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -674,6 +846,58 @@
 
 <ul>
 <li>study 代表服务器上的study项目</li>
+</ul>
+</li>
+<li><ul>
+<li>application.yaml (实验二)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8081</span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /study</span><br><span class="line"> //服务器端定义</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://localhost:3306/test?                    serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">    //数据库连接</span><br><span class="line">   </span><br><span class="line">    username: root</span><br><span class="line">    password: 123456</span><br><span class="line">  thymeleaf:</span><br><span class="line">    cache: false</span><br><span class="line">    encoding: UTF-8</span><br><span class="line">    mode: HTML5</span><br><span class="line">    suffix: .html</span><br><span class="line">    prefix: classpath:/templates/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>server</p>
+</li>
+<li><p>spring:</p>
+<ul>
+<li><p>database  &#x2F;&#x2F;定义JDBC连接MYSQL数据库</p>
+<ul>
+<li><p>driver-class-name：JDBC的驱动类</p>
+</li>
+<li><p>url：连接字符串</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/test?               serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>jdbc:mysql:协议名</li>
+<li>localhost：MySQl数据库服务器的IP地址</li>
+<li>3306：安装数据库时的设置的端口号</li>
+<li>test：目标数据库（test数据库）</li>
+<li>serverTimezone：数据库的时区信息（GMT%2B8&lt;&#x3D;&#x3D; GMT 8,东8区)</li>
+<li>characterEncoding：编码集UTF8,unicode编码</li>
+<li>useSSL：是否使用SSL加密协议</li>
+</ul>
+</li>
+<li><p>username：用户名</p>
+</li>
+<li><p>root：密码</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>thymeleaf: &#x2F;&#x2F;定义模板页面文字</p>
+<ul>
+<li>cache：是否启动页面缓存（缓存，只能判断存在还是不存在，无法判断页面是否修改，所以在开发时一般关闭）F5是刷新，ctrl+F5是强制刷新，系统将服务器端所有资源重新下载。</li>
+<li>encoding：thymeleaf页面的编码方式</li>
+<li>mode：HTML5标准</li>
+<li>suffix、prefix：后缀和前缀 &#x3D;&#x3D;&gt; 对哪些文件启动Thymeleaf模板引擎<ul>
+<li>对classpath:&#x2F;templates&#x2F;目录下，以.html结尾的文件执行thymeleaf模板</li>
+<li>classes目录是编译后产生的文件，在target文件夹下（target是编译后的文件夹）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">suffix: .html</span><br><span class="line">prefix: classpath:/templates/</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -1310,83 +1534,9 @@ http://rqj9yukzg.hn-bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_2023022
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://github.com/PlantProtect/hexopp/2023/02/09/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/hexopp/images/avatar.gif">
-      <meta itemprop="name" content="Q">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Push & Pull Zoom">
-      <meta itemprop="description" content="Love & Share & Freedom">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Push & Pull Zoom">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hexopp/2023/02/09/hello-world/" class="post-title-link" itemprop="url">Hello World ！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-02-09 20:21:00" itemprop="dateCreated datePublished" datetime="2023-02-09T20:21:00+08:00">2023-02-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-02-23 21:22:01" itemprop="dateModified" datetime="2023-02-23T21:22:01+08:00">2023-02-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <pre><code>   Welcome to my world ! 
-</code></pre>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1314353013&auto=1&height=66"></iframe>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/hexopp/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/hexopp/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
