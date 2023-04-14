@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>SpringBoot （一）</title>
+    <url>/hexopp//2023/03/04/Spring-Boot/</url>
+    <content><![CDATA[<p>（一）如何创建maven项目</p>
+<hr>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">本系列主要记录在javaee课上学习到的SpringBoot的知识点及遇到的问题。</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="1-创建maven项目"><a href="#1-创建maven项目" class="headerlink" title="1.创建maven项目"></a>1.创建maven项目</h3><p>项目管理工具，meven。源代码管理、测试、发布…..</p>
+<h4 id="1-1-maven项目目录结构"><a href="#1-1-maven项目目录结构" class="headerlink" title="1.1 maven项目目录结构"></a>1.1 maven项目目录结构</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|--src</span><br><span class="line"></span><br><span class="line">​      |--main   //项目发布的源代码</span><br><span class="line">          |--java    //项目的java代码</span><br><span class="line">          |-- resources //项目中除了java代码之外的所有资源文件。html页面，js</span><br><span class="line"></span><br><span class="line">​      | --test    //项目测试的源代码</span><br><span class="line">          |--java</span><br><span class="line">          |--resource</span><br><span class="line">|--pom.xml     //meaven的配置文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-pom-xml配置文件"><a href="#1-2-pom-xml配置文件" class="headerlink" title="1.2 pom.xml配置文件"></a>1.2 pom.xml配置文件</h3><ul>
+<li><p>meven的配置文件</p>
+<h4 id="1-2-1属性模块"><a href="#1-2-1属性模块" class="headerlink" title="1.2.1属性模块"></a>1.2.1属性模块</h4></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>unicode编码集</p>
+</li>
+<li><p>java编译器1.8</p>
+<h4 id="1-2-2-设置springboot框架"><a href="#1-2-2-设置springboot框架" class="headerlink" title="1.2.2 设置springboot框架"></a>1.2.2 设置springboot框架</h4></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当前项目study继承了spring-boot-starter-parent这一父项目</p>
+<h4 id="1-2-3-maven资料库配置"><a href="#1-2-3-maven资料库配置" class="headerlink" title="1.2.3 maven资料库配置"></a>1.2.3 maven资料库配置</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!-- 通过阿里云maven资料库下载软件包 --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyun-repos<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyun-plugin<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-4当前项目第三方依赖库"><a href="#1-2-4当前项目第三方依赖库" class="headerlink" title="1.2.4当前项目第三方依赖库"></a>1.2.4当前项目第三方依赖库</h4><ul>
+<li><p>二次开发</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">       <span class="comment">&lt;!-- 集成了tomcat --&gt;</span> </span><br><span class="line">       web应用服务器  </span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="comment">&lt;!--Spring JUnit单元测试--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="comment">&lt;!-- lombok  读取插件--&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="comment">&lt;!--MySQL JDBC驱动  连接数据库--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="comment">&lt;!-- mybatis support  增删改查对数据库 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>--&gt;</span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>--&gt;</span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>--&gt;</span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">       <span class="comment">&lt;!--thymeleaf模版  页面展现--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-Springboot主入口"><a href="#2-Springboot主入口" class="headerlink" title="2 Springboot主入口"></a>2 Springboot主入口</h3><h4 id="2-1Study项目的目录结构"><a href="#2-1Study项目的目录结构" class="headerlink" title="2.1Study项目的目录结构"></a>2.1Study项目的目录结构</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">edu.hue.jk</span><br><span class="line">     |--MainApp.java</span><br><span class="line">     |--</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2MainApp"><a href="#2-2MainApp" class="headerlink" title="2.2MainApp"></a>2.2MainApp</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.hue.jk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainApp</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(MainApp.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>@xxxx: 注解 （Annotation)为驱动的javaEE开发。Java8之后引入的一个特性，注解也是一种特殊的类</li>
+<li>@SpringBootApplication:  用来标识当前的类是主入口类，注意一个项目只有一个主路口类</li>
+</ul>
+<h4 id="2-3-SpringBoot-项目启动流程"><a href="#2-3-SpringBoot-项目启动流程" class="headerlink" title="2.3 SpringBoot 项目启动流程"></a>2.3 SpringBoot 项目启动流程</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Starting MainApp on LAPTOP-NMUAI4F7 with PID 29972</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>LAPTOP-NMUAI4F7:主机号</li>
+<li>PID:进程号</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">No active profile set, falling back to default profiles: default</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>profiles:配置文件</p>
+</li>
+<li><p>没有活跃的应用配置程序配置文件被设置。系统调用缺省default的配置文件来完成用户</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">No mybatis</span><br><span class="line">还没有设置Mybatits设置</span><br><span class="line">完成对数据库的增删改查</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Tomcat initialized with port(s): 8080 (http)</span><br><span class="line">Starting service [Tomcat]</span><br><span class="line">Starting Servlet engine: [Apache Tomcat/9.0.16]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>web应用服务器（tomcat）启动，端口号8080</li>
+<li>当前web服务器通过8080端口向用户提供http服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Root WebApplicationContext: initialization completed in 1473 ms</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>表示tomcat启动成功</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuratio</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>无法找到Thymeleaf模板文件</li>
+<li>Thymeleaf为用户提供模板页面呈现</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Started MainApp in 2.364 seconds (JVM running for 2.822)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>表明启动通过了</li>
+</ul>
+<p><em><strong>tomcat轻量级服务器，可以同时运行大概200名用户访问服务器</strong></em></p>
+<h4 id="2-4验证是否启动成功"><a href="#2-4验证是否启动成功" class="headerlink" title="2.4验证是否启动成功"></a>2.4验证是否启动成功</h4><ul>
+<li><p>打开浏览器，地址栏输入：</p>
+</li>
+<li><p>&#96;&#96;&#96;shell<br><a href="http://localhost:8080/">http://localhost:8080/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* http: 协议名</span><br><span class="line"></span><br><span class="line">* localhost：当前主机</span><br><span class="line"></span><br><span class="line">* 8080：web服务的端口号</span><br><span class="line"></span><br><span class="line">* 如果用户没有输入需要访问的资源，系统默认访问index.html</span><br><span class="line"></span><br><span class="line">##### 2.4.1 404错误</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">Whitelabel Error Page</span><br><span class="line">This application has no explicit mapping for /error, so you are seeing this as a fallback.</span><br><span class="line"></span><br><span class="line">Fri Mar 03 09:52:50 CST 2023</span><br><span class="line">There was an unexpected error (type=Not Found, status=404).</span><br><span class="line">No message available</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-应用程序的配置文件-applacation-yaml"><a href="#3-应用程序的配置文件-applacation-yaml" class="headerlink" title="3.应用程序的配置文件 applacation.yaml"></a>3.应用程序的配置文件 applacation.yaml</h3><h4 id="3-1-在resource目录下，创建applaciton-yaml"><a href="#3-1-在resource目录下，创建applaciton-yaml" class="headerlink" title="3.1 在resource目录下，创建applaciton.yaml"></a>3.1 在resource目录下，创建applaciton.yaml</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8081</span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /study</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>默认端口号改为8081</p>
+</li>
+<li><p>应用名设为study</p>
+</li>
+<li><p>启动应用程序，控制台输出时：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">: Tomcat initialized with port(s): 8081 (http)  : Tomcat started on port(s): 8081 (http) with context path &#x27;/study&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>在浏览器输入</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">http://localhost:8081/study/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>study 代表服务器上的study项目</li>
+</ul>
+</li>
+<li><ul>
+<li>application.yaml (实验二)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8081</span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /study</span><br><span class="line"> //服务器端定义</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://localhost:3306/test?                    serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">    //数据库连接</span><br><span class="line">   </span><br><span class="line">    username: root</span><br><span class="line">    password: 123456</span><br><span class="line">  thymeleaf:</span><br><span class="line">    cache: false</span><br><span class="line">    encoding: UTF-8</span><br><span class="line">    mode: HTML5</span><br><span class="line">    suffix: .html</span><br><span class="line">    prefix: classpath:/templates/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>server</p>
+</li>
+<li><p>spring:</p>
+<ul>
+<li><p>database  &#x2F;&#x2F;定义JDBC连接MYSQL数据库</p>
+<ul>
+<li><p>driver-class-name：JDBC的驱动类</p>
+</li>
+<li><p>url：连接字符串</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">jdbc:mysql://localhost:3306/test?               serverTimezone=GMT%2B8&amp;characterEncoding=utf-8&amp;useSSL=false</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>jdbc:mysql:协议名</li>
+<li>localhost：MySQl数据库服务器的IP地址</li>
+<li>3306：安装数据库时的设置的端口号</li>
+<li>test：目标数据库（test数据库）</li>
+<li>serverTimezone：数据库的时区信息（GMT%2B8&lt;&#x3D;&#x3D; GMT 8,东8区)</li>
+<li>characterEncoding：编码集UTF8,unicode编码</li>
+<li>useSSL：是否使用SSL加密协议</li>
+</ul>
+</li>
+<li><p>username：用户名</p>
+</li>
+<li><p>root：密码</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>thymeleaf: &#x2F;&#x2F;定义模板页面文字</p>
+<ul>
+<li>cache：是否启动页面缓存（缓存，只能判断存在还是不存在，无法判断页面是否修改，所以在开发时一般关闭）F5是刷新，ctrl+F5是强制刷新，系统将服务器端所有资源重新下载。</li>
+<li>encoding：thymeleaf页面的编码方式</li>
+<li>mode：HTML5标准</li>
+<li>suffix、prefix：后缀和前缀 &#x3D;&#x3D;&gt; 对哪些文件启动Thymeleaf模板引擎<ul>
+<li>对classpath:&#x2F;templates&#x2F;目录下，以.html结尾的文件执行thymeleaf模板</li>
+<li>classes目录是编译后产生的文件，在target文件夹下（target是编译后的文件夹）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">suffix: .html</span><br><span class="line">prefix: classpath:/templates/</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringBoot笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>某天醒来我发现进入了一个地球人的身体</title>
+    <url>/hexopp//2023/03/22/%E6%9F%90%E5%A4%A9%E9%86%92%E6%9D%A5%E6%88%91%E5%8F%91%E7%8E%B0%E8%BF%9B%E5%85%A5%E4%BA%86%E4%B8%80%E4%B8%AA%E5%9C%B0%E7%90%83%E4%BA%BA%E7%9A%84%E8%BA%AB%E4%BD%93/</url>
+    <content><![CDATA[<h4 id="某天醒来之后发现我进入了一个地球人的身体，我在学习如何控制它"><a href="#某天醒来之后发现我进入了一个地球人的身体，我在学习如何控制它" class="headerlink" title="某天醒来之后发现我进入了一个地球人的身体，我在学习如何控制它"></a>某天醒来之后发现我进入了一个地球人的身体，我在学习如何控制它</h4><h5 id="——自我使用说明书"><a href="#——自我使用说明书" class="headerlink" title="——自我使用说明书"></a>——自我使用说明书</h5><p>gibl！完蛋了，我发现我进入了一个地球人的身体里了。</p>
+<p>我得学着掌控这副身体。</p>
+<p>1.容易疲惫[1]，等一颗叫太阳的恒星绕到这个星球的背面时，这个身体最好开始入睡。（备注：就是关掉发光装置，把可见光采集端口上面的肌肉滑下来，进入一种休眠状态）</p>
+<p>[1]疲惫，意识输出处于一种不连续的状态，无法有效的操控躯体。一般进入休眠状态（7&#x2F;该行星自转时间）以上既可以恢复。</p>
+<p>2.需要摄入一定的能量维持大脑（身体上部的意识载体的球体）和躯体的移动等任务。</p>
+<p>3.同我们电子元件构成的躯体不同，身体是一种由碳元素为主构成的系统，身体各个部分的系统间产生的信号传回大脑时，会产生不同的波动，他们称这个叫”情绪“。</p>
+<p>4.情绪是一种我们世界不存在的东西，我也是花了很长时间才对这个东西有一点把握。对于他们的语言系统我还不是太熟练，没办法将这个东西用更具体的文字描述出来。</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot （二） MVC</title>
+    <url>/hexopp//2023/03/17/SpringBoot-MVC/</url>
+    <content><![CDATA[<h3 id="1-MVC模型"><a href="#1-MVC模型" class="headerlink" title="1.MVC模型"></a>1.MVC模型</h3><ul>
+<li>M：model，模型层，和数据库打交道。《&#x3D;&#x3D;MyBatis</li>
+<li>V：view，视图层。用户看到的页面结果。 《&#x3D;&#x3D; Thymeleafs模板语言</li>
+<li>C：controller，控制层。实现业务逻辑：数据的处理和页面的跳转。《&#x3D;&#x3D;Spring MVC</li>
+</ul>
+<h3 id="2-RequestMapping注解-Annotation"><a href="#2-RequestMapping注解-Annotation" class="headerlink" title="2.RequestMapping注解(Annotation)"></a>2.RequestMapping注解(Annotation)</h3><p>基于注解驱动的开发</p>
+<ul>
+<li><p>将用户的url地址，与控制器中某个方法映射（Mapping）起来</p>
+</li>
+<li><p>多个request映射请求，可以映射同一个方法，一个请求不能映射多个方法</p>
+</li>
+<li><p>映射过程中，可以使用通配符（？，*）</p>
+</li>
+<li><p>映射可以是多级映射</p>
+</li>
+<li><p>&#96;&#96;&#96;http<br><a href="http://localhost:8080/study/hello/h1">http://localhost:8080/study/hello/h1</a></p>
+<p><a href="http://localhost:8080/study/admin/user/edit">http://localhost:8080/study/admin/user/edit</a><br>即restful风格<br><a href="http://localhoost:8080/study/client/book/buy">http://localhoost:8080/study/client/book/buy</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```shell</span><br><span class="line">@Controller</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&quot;hello1&quot;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>@RequestMapping(“hello1”)  映射关系，当输入<a href="http://localhost:8080/study/hello1">http://localhost:8080/study/hello1</a> 中的hello1</p>
+<p> @ResponseBody 响应体 返回的内容</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line">  <span class="meta">@RequestMapping(&quot;hello2&quot;)</span></span><br><span class="line">  <span class="keyword">public</span>  String <span class="title function_">hello2</span><span class="params">()</span>&#123;</span><br><span class="line">      String str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> ;i &lt;=<span class="number">5</span> ; i++)&#123;</span><br><span class="line">          str += <span class="string">&quot;&lt;h&quot;</span>+i+<span class="string">&quot;&gt;Hello,world!&lt;/h&quot;</span>+i+<span class="string">&quot;&gt;&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> str;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：RequestMapping(“xx”)  映射关系只能一个控制器（controller）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;hi&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello3</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错信息</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map <span class="string">&#x27;helloController&#x27;</span> method </span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello1()</span><br><span class="line">to &#123; /hi&#125;: There is already <span class="string">&#x27;helloController&#x27;</span> bean method</span><br><span class="line"><span class="keyword">public</span> java.lang.String edu.hue.jk.controller.HelloController.hello3() mapped.</span><br></pre></td></tr></table></figure>
+
+<p>但是可以多个url地址映射同一个controller方法：即h1和h3都可以</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">hello1</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h？&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>h？ 代表h后面放任意一个字符</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h*&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>*：表示0个或者多个字符</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(&quot;hello/h2&quot;)</span><br><span class="line">public String hello6()&#123;</span><br><span class="line">    return  &quot;Hello, world!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表示路径分级了，study&#x2F;hello&#x2F;h2</p>
+<p>另一种多级路径，可以直接在controller下面写一个requestMapping，表示所有的请求方法前面都加一个映射关系</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;hello&quot;)  //在此类的基础上，再增加一个级别，即所有的路径需要再加入一个hello</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&#123;&quot;h1&quot;,&quot;h3&quot;&#125;)</span><br><span class="line">    public String hello1()&#123;</span><br><span class="line">        return  &quot;Hello, world!&quot;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-什么是Annotation注解"><a href="#3-什么是Annotation注解" class="headerlink" title="3.什么是Annotation注解"></a>3.什么是Annotation注解</h3><p>Java8引入的重要技术，</p>
+<h3 id="4-Controller注解"><a href="#4-Controller注解" class="headerlink" title="4.@Controller注解"></a>4.@Controller注解</h3><ul>
+<li><p>Spring;弹簧，核心技术：依赖注入，控制翻转</p>
+</li>
+<li><p>使用controller注解的类，在应用程序启动时，会被&#x3D;&#x3D;自动注入&#x3D;&#x3D;到spring的容器中</p>
+</li>
+</ul>
+<h3 id="5-Restful风格"><a href="#5-Restful风格" class="headerlink" title="5.Restful风格"></a>5.Restful风格</h3><ul>
+<li><p>前后端分离开发</p>
+</li>
+<li><p>基于切片的开发</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/study/admin/**/*  &lt;==控制所有的admin下的所有请求</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/**/* del   &lt;==控制所有的删除请求</span><br></pre></td></tr></table></figure>
+
+<p>用于定义url请求的风格（多级映射）</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/study/hello/h1</span><br><span class="line"></span><br><span class="line">http://localhost:8080/study/admin/user/edit</span><br><span class="line">即restful风格</span><br><span class="line">http://localhoost:8080/study/client/book/buy</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-RequestMapping请求参数"><a href="#6-RequestMapping请求参数" class="headerlink" title="6.@RequestMapping请求参数"></a>6.@RequestMapping请求参数</h3><h4 id="6-1-请求参数"><a href="#6-1-请求参数" class="headerlink" title="6.1 请求参数"></a>6.1 请求参数</h4><figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/study/hello2/h1?empno=1000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在URL中“？”后面的部分，是请求参数</p>
+</li>
+<li><p>使用键值对的方式</p>
+<ul>
+<li><p>等号左边是key</p>
+</li>
+<li><p>等号右边是value</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">empno=1000</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>如果有多个请求参数，则使用&#x3D;&#x3D;&amp;&#x3D;&#x3D;进行切割</p>
+<ul>
+<li>四个参数：empno、 name、 hiredate、 sal</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">empno=1000&amp;ename=qyc&amp;hiredate=2022-4-5&amp;sal=8000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>url参数的值，都是&#x3D;&#x3D;字符串&#x3D;&#x3D;</p>
+</li>
+</ul>
+<h4 id="6-2-在-RequestMapping中获取请求参数"><a href="#6-2-在-RequestMapping中获取请求参数" class="headerlink" title="6.2 在@RequestMapping中获取请求参数"></a>6.2 在@RequestMapping中获取请求参数</h4><ul>
+<li>step1：客户端发送URL请求，包含有empno请求的参数</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/study/hello2/h1?empno=1000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>step2:根据hello2&#x2F;h1，从controller控制器中找到对应的函数</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;hello2&quot;)</span><br><span class="line">public class Hello2Controller &#123;</span><br><span class="line">    @ResponseBody</span><br><span class="line">    @RequestMapping(&quot;h1&quot;)</span><br><span class="line">    public String h1(String empno)&#123;</span><br><span class="line">        return  &quot;&lt;h1&gt;&quot;+ empno + &quot;&lt;/h1&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Step3:将empno&#x3D;1000请求参数与函数中的形参String empno进行匹配。如果匹配成功，将1000值&#x3D;&#x3D;注入&#x3D;&#x3D;到形参中</p>
+</li>
+<li><p>Step4：完成字符串拼接，将拼接后结果返回给客户端的浏览器</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&quot;<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&quot;+ empno + &quot;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-1-变形1-：自动类型转换"><a href="#6-2-1-变形1-：自动类型转换" class="headerlink" title="6.2.1 变形1 ：自动类型转换"></a>6.2.1 变形1 ：自动类型转换</h4><ul>
+<li>URL请求参数，默认类型为字符串String类型</li>
+<li>RequesMapping函数中的形参类型可能是多种多样的，不一定都是字符串 类型</li>
+<li>系统会自动的将请求参数中的&#x3D;&#x3D;字符串&#x3D;&#x3D;转换为目标函数形参对应的类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Double.valueOf(<span class="string">&quot;1234&quot;</span>)<span class="comment">//系统自动调用该函数</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当是日期时，Date 要用 import java.sql.Date;</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line">   <span class="meta">@RequestMapping(&quot;h3&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> String <span class="title function_">h3</span><span class="params">( Date hiredate)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  <span class="string">&quot;&lt;h1&gt;&quot;</span>+ hiredate + <span class="string">&quot;&lt;/h1&gt;&quot;</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-2-变形2-：多参数请求"><a href="#6-2-2-变形2-：多参数请求" class="headerlink" title="6.2.2 变形2 ：多参数请求"></a>6.2.2 变形2 ：多参数请求</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;h4&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">h4</span><span class="params">( String empno,Date hiredate,<span class="type">double</span> sal)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span><span class="string">&quot;&lt;h1&gt;&quot;</span>+ empno + <span class="string">&quot;&lt;/h1&gt;&quot;</span> +  <span class="string">&quot;&lt;h1&gt;&quot;</span>+ hiredate + <span class="string">&quot;&lt;/h1&gt;&quot;</span> + <span class="string">&quot;&lt;h1&gt;&quot;</span>+ sal + <span class="string">&quot;&lt;/h1&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>  str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>URL请求，多个请求参数</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://localhost:8080/study/hello2/h4?empno=11&amp;sal=1000&amp;hiredate=2022-2-22</span><br></pre></td></tr></table></figure>
+
+<p>请求时，参数的顺序并不重要，会自动匹配</p>
+<p>&#x3D;&#x3D;调试-打断点-&#x3D;&#x3D;</p>
+<p>F8单步执行</p>
+<h4 id="6-2-2-变形3：多个参数自动装箱（boxing）成一个JavaBean"><a href="#6-2-2-变形3：多个参数自动装箱（boxing）成一个JavaBean" class="headerlink" title="6.2.2 变形3：多个参数自动装箱（boxing）成一个JavaBean"></a>6.2.2 变形3：多个参数自动装箱（boxing）成一个JavaBean</h4><ul>
+<li><p>什么是javaBean：一种特殊的Java类。</p>
+<ul>
+<li>所有的成员变量都是私有的private的</li>
+<li>有一个不带参数的构造函数</li>
+<li>通过一组get、set函数来读取或者修改属性的值</li>
+<li>以上可以通过右键-生成-来对应生成</li>
+</ul>
+</li>
+<li><p>实体Bean：EntityBean</p>
+<ul>
+<li>跟数据库的表可以实现一一对应</li>
+<li>Bean的名字，与表的名字完成相同（Emp）</li>
+<li>Bean中的属性名，与表的字段名相同（empno、ename、hiredate、sal）</li>
+<li>属性的类型，与表中字段的类型兼容</li>
+<li>实体Bean的一个实例（instance）对应数据库数据表中的一条记录</li>
+</ul>
+</li>
+<li><p>JDO：Java Data Obiect ： java与关系数据库的关系</p>
+<ul>
+<li>Data：数据库中的内容，永久存在数据库中的。</li>
+<li>Object：JAvaBean的实例，存放在内存中。</li>
+<li>持久化操作，将内存上的东西存入到数据库中</li>
+</ul>
+</li>
+<li><p>装箱过程</p>
+<ul>
+<li>Step1：读取URL请求参数列表</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">h5?empno=11&amp;sal=1000&amp;hiredate=2022-2-22</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>setp2:如果函数形参是一个JavaBean，系统会自动调用该Javabean的一组set函数，来实现属性的赋值。这个过程称为自动装箱</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"> <span class="meta">@RequestMapping(&quot;h5&quot;)</span></span><br><span class="line"> <span class="keyword">public</span> String <span class="title function_">h5</span><span class="params">(Emp emp)</span></span><br><span class="line"> &#123;</span><br><span class="line">     <span class="keyword">return</span>  <span class="string">&quot;&lt;h1&gt;&quot;</span>+ emp + <span class="string">&quot;&lt;/h1&gt;&quot;</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SpringBoot笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>SpringBoot笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是服务器、网站服务器、文件服务器？</title>
+    <url>/hexopp//2023/03/14/%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F/</url>
+    <content><![CDATA[<h4 id="什么是服务器、网站服务器、文件服务器？"><a href="#什么是服务器、网站服务器、文件服务器？" class="headerlink" title="什么是服务器、网站服务器、文件服务器？"></a>什么是服务器、网站服务器、文件服务器？</h4><p>1.什么是服务器？什么是云服务器</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">服务器是一种计算机硬件或软件，它可以为其他程序或设备（称为“客户端”）提供功能。这种架构叫做客户端-服务器模型。服务器可以提供各种功能，通常称为“服务”，比如在多个客户端之间共享数据或资源，或者为客户端执行计算。</span><br><span class="line"></span><br><span class="line">A server is a software or hardware device that accepts and responds to requests made over a network. The device that makes the request, and receives a response from the server, is called a client.</span><br><span class="line"></span><br><span class="line">云服务器是一种基于互联网的虚拟化技术，它可以将物理服务器的资源划分成多个独立的虚拟服务器，并按需分配给用户。云服务器可以实现弹性伸缩，按使用量付费，高可用性等优势。</span><br></pre></td></tr></table></figure>
+
+<p>服务器可以理解成电脑？云服务器可以理解成远端的电脑吗?</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">您的理解是基本正确的。服务器可以理解成一种特殊的电脑，它可以为其他电脑或设备提供服务。云服务器可以理解成远端的虚拟电脑，它可以通过互联网访问和使用。</span><br></pre></td></tr></table></figure>
+
+
+<p>2.请问网站服务器和文件服务器有什么区别？请给我介绍更多的细节？</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">服务器是一种计算机，它可以处理请求并向另一台计算机提供数据或资源。服务器有很多种类，根据它们提供的服务不同，可以分为网站服务器，文件服务器，邮件服务器等等。</span><br><span class="line"></span><br><span class="line">网站服务器是一种可以托管网页的服务器，它可以让用户通过浏览器访问网站的内容。比如，当您在浏览器中输入 www.bing.com 时，您就是在请求网站服务器上的一个网页。</span><br><span class="line"></span><br><span class="line">文件服务器是一种可以存储和共享文件的服务器，它可以让用户在网络上方便地访问和管理文件。比如，当您在电脑上打开一个网络驱动器时，您就是在访问文件服务器上的一个文件夹。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.如何将我自己的电脑变成一台网络服务器呢?</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">将您自己的电脑变成一台网络服务器的方法有以下几个步骤：</span><br><span class="line"></span><br><span class="line">1.选择一台适合做网络服务器的电脑，它应该有足够的硬件配置，稳定的网络连接，和安全的防火墙设置。</span><br><span class="line">2.下载并安装一个好的网络服务器软件，比如 Apache ， IIS ， Nginx 等。根据您的需要，选择合适的操作系统和版本。</span><br><span class="line">3.配置您的网络服务器软件，设置一些参数和选项，比如端口号，根目录，日志文件等。您也可以安装一些扩展模块或插件来增加功能。</span><br><span class="line">4.创建一个基本的主页来测试服务器是否正常工作。您可以用 HTML 或其他语言编写一个简单的网页，并保存在服务器的根目录下。</span><br><span class="line">5.检查您是否可以从 http://127.0.0.1/ 访问到您的网站。这是您电脑上的本地地址，只有您自己可以看到。</span><br><span class="line">6.让一个朋友从 http://yourWANip/ 测试您的网站是否可以被外部访问。这是您电脑在互联网上的公共地址，其他人可以通过它访问到您的网站。如果不能访问，请检查您的路由器和防火墙设置是否正确。</span><br><span class="line">7.购买一个域名并将它指向您的公共地址。这样，用户就可以通过一个易记和友好的名称来访问您的网站了。</span><br></pre></td></tr></table></figure>
+
+<p>备注：网络服务器的作用就是将自己的网站上传到此，别人可以访问了。</p>
+<p>4.如何将自己的电脑变成文件服务器呢？</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">将自己的电脑变成文件服务器的方法有以下几个步骤：</span><br><span class="line"></span><br><span class="line">1.选择一台适合做文件服务器的电脑，它应该有足够的存储空间，稳定的网络连接，和安全的防火墙设置1。</span><br><span class="line">2.下载并安装一个好的文件服务器软件，比如 FTP ， SFTP ， CIFS 等。根据您的需要，选择合适的操作系统和版本。</span><br><span class="line">3.配置您的文件服务器软件，设置一些参数和选项，比如用户名，密码，端口号，根目录等。您也可以设置一些权限和规则来控制访问和传输。</span><br><span class="line">4.检查您是否可以从本地或外部访问到您的文件服务器。您可以用一个 FTP 客户端软件或者 Windows 资源管理器来连接到您的文件服务器，并上传或下载文件。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>5.文件服务器有什么用？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">文件服务器的用途有以下几个：</span><br><span class="line"></span><br><span class="line">文件服务器可以让您在不同的电脑或设备之间共享文件，比如文档，图片，视频等。</span><br><span class="line">文件服务器可以让您在任何地方访问和管理您的文件，只要有互联网连接。</span><br><span class="line">文件服务器可以让您备份和恢复您的文件，防止数据丢失或损坏。</span><br><span class="line">文件服务器可以让您控制文件的权限和安全性，比如谁可以查看，修改，删除等。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.通过文件服务器和网络服务器在同一台电脑构建一个网站，允许个人通过文件服务器修改自己的网站信息，然后通过网站服务器来访问</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">您的想法是可行的，但是需要一些技术和配置。以下是一些可能的步骤：</span><br><span class="line"></span><br><span class="line">1.在您的电脑上安装一个文件服务器软件和一个网站服务器软件，比如 FileZilla Server 和 Apache HTTP Server 。</span><br><span class="line">2.在文件服务器软件上创建一个用户账号，并设置一个根目录，比如 C:\Users\YourName\Website 。</span><br><span class="line">3.在网站服务器软件上配置一个虚拟主机，并指定一个文档根目录，比如 C:\Users\YourName\Website 。</span><br><span class="line">4.在您的电脑上创建一个网站文件夹，并在里面放置一些网页文件，比如 index.html ， about.html 等。</span><br><span class="line">在您的电脑上打开浏览器，并输入 http://localhost ，就可以看到您的网站了。</span><br><span class="line">5.在其他电脑或设备上安装一个 FTP 客户端软件，并连接到您的文件服务器，就可以修改或上传您的网页文件了。</span><br></pre></td></tr></table></figure>
+
+<p>6.FTP协议</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FTP是指“文件传输协议”（File Transfer Protocol），是一种用于将文件从一台计算机传输到另一台计算机的标准网络协议。FTP允许用户在两台计算机之间进行文件传输。其中一台计算机作为FTP服务器，另一台计算机（客户端）可以连接到该服务器来上传或下载文件。</span><br><span class="line"></span><br><span class="line">FTP协议允许用户在其计算机和服务器之间传输任何类型的文件，包括文本、图像、音频和视频等多种媒体。它通常用于在网络上共享文件和文件夹，允许多个用户同时访问同一个文件。</span><br><span class="line"></span><br><span class="line">FTP是一种相对简单而又可靠的文件传输协议，它广泛应用于互联网、局域网和广域网等不同类型的网络系统中。</span><br></pre></td></tr></table></figure>
+
+<p>7.http协议</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">HTTP 协议是一种用于获取网页等资源的协议1。它是 Web 上数据交换的基础，它是一种客户端-服务器协议，也就是说请求是由接收方发起的，通常是 Web 浏览器2。HTTP 协议可以用于传输各种形式的数据，比如纯文本，超文本，音频，视频等1。</span><br><span class="line"></span><br><span class="line">HTTP 协议的工作原理是：</span><br><span class="line"></span><br><span class="line">客户端（比如浏览器）向服务器发送一个 HTTP 请求，包含一个方法（比如 GET ， POST ， PUT 等），一个目标地址（比如 http://example.com/index.html ），和一些可选的头部和正文信息。</span><br><span class="line">服务器接收到请求后，根据请求的方法和地址，处理请求，并返回一个 HTTP 响应，包含一个状态码（比如 200 ， 404 ， 500 等），和一些可选的头部和正文信息。</span><br><span class="line">客户端接收到响应后，根据响应的状态码和头部信息，解析响应的正文信息，并显示或处理结果。</span><br></pre></td></tr></table></figure>
+
+<img src="https://github.com/QiYongchuan/Qiyongchuan/blob/main/images/ChatMind(1).png">
+
+<p>备注：本文主要由new bing回答所成，最后的框架图由chatMind生成。</p>
+]]></content>
+      <categories>
+        <category>服务器</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端笔记整理（一）</title>
+    <url>/hexopp//2023/03/07/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<img src="http://rqj9yukzg.hn-bkt.clouddn.com/chatgpt_front.png2?e=1678160589&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:VRS_zkveVL904ovcWSOBoIUQRKY=">
+
+<img src="http://rqj9yukzg.hn-bkt.clouddn.com/chatgpt_front.png?e=1678160522&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:K0ZW4wOv54AIhA6IHUrRT6WeZIM=">
+
+
+
+<h4 id="1-HTML-部分"><a href="#1-HTML-部分" class="headerlink" title="1.HTML 部分"></a>1.HTML 部分</h4><p>单标签有哪些？</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-1HTML基础知识点"><a href="#1-1HTML基础知识点" class="headerlink" title="1.1HTML基础知识点"></a>1.1HTML基础知识点</h5><ol>
+<li>Html5 与 html4的区别：</li>
+</ol>
+<ul>
+<li>html5新增语义化标签，如<header> <nav>等</li>
+<li>Html5新增表单控件，如<code>&lt;input type=&quot;date&quot;&gt;</code> <code>&lt;input type=&quot;color&quot;&gt;</code>等</li>
+<li>Html5新增多媒体标签，如<code>&lt;video&gt;</code>、<code>&lt;audio&gt;</code>等</li>
+</ul>
+<p> 2.HTML基础标签<br> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">* 标题标签 &lt;h1&gt; &lt;h6&gt;</span><br><span class="line"></span><br><span class="line">* 段落标签  &lt;p&gt;</span><br><span class="line"></span><br><span class="line">* 链接标签  &lt;a&gt;</span><br><span class="line"></span><br><span class="line">* 图片标签  &lt;img&gt;</span><br><span class="line"></span><br><span class="line">* 列表标签  &lt;ul&gt; &lt;ol&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>表格标签  </p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">th</span>&gt;</span>表头<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span> <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表单标签</p>
+</li>
+</ul>
+ <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>  <span class="attr">action</span>=<span class="string">&quot;www.xxx.xxx&quot;</span> <span class="attr">methods</span>=<span class="string">&quot;Get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></span><br><span class="line">        提交</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.Html语义化标签</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span>、<span class="tag">&lt;<span class="name">nav</span>&gt;</span>、<span class="tag">&lt;<span class="name">main</span>&gt;</span>、<span class="tag">&lt;<span class="name">article</span>&gt;</span>、<span class="tag">&lt;<span class="name">section</span>&gt;</span>、<span class="tag">&lt;<span class="name">aside</span>&gt;</span>、<span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>等标签用于描述页面的结构和内容。<br>语义化标签可以提高页面的可读性和可维护性，也有助于SEO优化。</p>
+<p>4.class和id属性</p>
+<p>用于标记元素并为其添加样式或JavaScript脚本<br>href、src、alt、title等属性用于定义链接、图片、描述和标题等内容<br>value、name、type等属性用于定义表单控件的值、名称和类型等。</p>
+<p>5.HTML的文本格式化标签</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">加粗标签&lt;b&gt;和&lt;strong&gt;</span><br><span class="line">斜体标签&lt;i&gt;和&lt;em&gt;</span><br><span class="line">下划线标签&lt;u&gt;</span><br><span class="line">删除线标签&lt;s&gt;</span><br><span class="line">换行标签&lt;br&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HTML可能会问到的点"><a href="#HTML可能会问到的点" class="headerlink" title="HTML可能会问到的点"></a>HTML可能会问到的点</h3><p>HTML 是前端开发的基础之一，以下是 HTML 部分可能会问到的知识点：</p>
+<ol>
+<li>语义化标签</li>
+</ol>
+<ul>
+<li>介绍 HTML5 的语义化标签（例如 header, nav, section, article 等）</li>
+<li>讲解使用语义化标签的好处</li>
+</ul>
+<p>2.盒模型</p>
+<ul>
+<li>解释盒模型中的内容区、内边距、边框和外边距的概念</li>
+<li>讨论盒模型的两个版本，W3C 标准盒模型和 IE 盒模型</li>
+<li>给定特定的样式和盒模型，计算出盒模型的总宽度和高度</li>
+</ul>
+<p>3.定位</p>
+<ul>
+<li>讲解 position 属性有哪些取值，以及它们的作用和差异</li>
+<li>详细介绍 absolute 和 relative 定位的区别</li>
+<li>position 为 fixed 的元素的定位方式是什么？</li>
+</ul>
+<p>4.响应式设计</p>
+<ul>
+<li>讲解响应式设计的概念</li>
+<li>解释 viewport</li>
+<li>解释媒体查询的基本语法和使用方法</li>
+<li>实现简单的响应式设计效果</li>
+</ul>
+<p>5.Flexbox 和 Grid Layout</p>
+<ul>
+<li>讲解 Flexbox 和 Grid Layout 的概念和基本用法</li>
+<li>比较 Flexbox 和 Grid Layout 的异同</li>
+</ul>
+<p>6.CSS 预处理器</p>
+<ul>
+<li>介绍 CSS 预处理器的作用和优势</li>
+<li>讲解 Sass 和 Less 的语法和使用方法</li>
+<li>使用 Sass 和 Less 实现基本的样式</li>
+</ul>
+<h3 id="一）语义化标签部分"><a href="#一）语义化标签部分" class="headerlink" title="(一）语义化标签部分"></a>(一）语义化标签部分</h3><p>当面试官问及关于 HTML 的语义化标签时，可能会问到以下知识点：</p>
+<ol>
+<li>HTML5 的语义化标签有哪些？</li>
+</ol>
+<ul>
+<li>header</li>
+<li>nav</li>
+<li>aside</li>
+<li>section</li>
+<li>article</li>
+<li>main</li>
+<li>footer</li>
+<li>figure</li>
+<li>figcaption</li>
+<li>details</li>
+<li>summary</li>
+<li>time 等</li>
+</ul>
+<ol>
+<li>语义化标签的作用是什么？</li>
+</ol>
+<ul>
+<li>更便于搜索引擎理解页面结构，提高 SEO</li>
+<li>更便于屏幕阅读器等辅助工具理解网页内容，提高可访问性</li>
+<li>提高代码可读性和可维护性</li>
+<li>方便开发人员和设计人员协作，更快速地开发项目</li>
+</ul>
+<ol>
+<li>如何正确使用语义化标签？</li>
+</ol>
+<ul>
+<li>根据页面的结构、含义和功能选择合适的标签</li>
+<li>每个页面只应当使用一个 <code>&lt;h1&gt;</code> 标签，其他标题应该逐级递进</li>
+<li>如果某个区域不适合使用语义化标签，可以考虑使用 <code>&lt;div&gt;</code> 或 <code>&lt;span&gt;</code> 等其他标签</li>
+</ul>
+<ol>
+<li>语义化标签在实际项目中的应用</li>
+</ol>
+<ul>
+<li>在网页头部放置<code>&lt;header&gt;</code>标签，用于放置网站的主导航菜单和品牌信息等</li>
+<li>在网页主体放置<code>&lt;main&gt;</code>标签，用于放置主要内容，例如文章、产品列表等</li>
+<li>在网页底部放置 <code>&lt;footer&gt; </code>标签，用于放置版权信息和其他友情链接等</li>
+<li>在文字和图片之间使用 <code>&lt;figure&gt;</code> 和 <code>&lt;figcaption&gt;</code> 标签，更好地呈现图片和图片说明文字的关系</li>
+<li>使用 <code>&lt;section&gt;</code> 标签来组织相关的内容和子标题，使页面结构更加清晰</li>
+</ul>
+<p>以上是关于 HTML 语义化标签可能会考察的知识点，建议在面试前加强复习和练习。</p>
+<h3 id="二）盒子模型部分"><a href="#二）盒子模型部分" class="headerlink" title="(二）盒子模型部分"></a>(二）盒子模型部分</h3><p>盒子模型（Box Model）是 CSS 中的一个概念，用于描述 HTML 元素的尺寸和属性。盒子模型将 HTML 元素看作一个矩形盒子，由内容区域、内边距（padding）、边框（border）和外边距（margin）组成，如下图所示：</p>
+<img src="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/box-model.png">
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model#%E7%9B%92%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%90%84%E4%B8%AA%E9%83%A8%E5%88%86">盒模型的各个部分</a></p>
+<p>CSS 中组成一个块级盒子需要：</p>
+<ul>
+<li><strong>Content box</strong>: 这个区域是用来显示内容，大小可以通过设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width"><code>width</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/height"><code>height</code></a>.</li>
+<li><strong>Padding box</strong>: 包围在内容区域外部的空白区域；大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding"><code>padding</code></a> 相关属性设置。</li>
+<li><strong>Border box</strong>: 边框盒包裹内容和内边距。大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border"><code>border</code></a> 相关属性设置。</li>
+<li><strong>Margin box</strong>: 这是最外面的区域，是盒子和其他元素之间的空白区域。大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin"><code>margin</code></a> 相关属性设置。</li>
+</ul>
+<p>盒子模型的两种标准：标准盒模型和替代盒模型（也叫IE盒子模型）</p>
+<p>在标准盒模型中，实际占用空间包括了padding和border以及margin</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  width: 350px;</span><br><span class="line">  height: 150px;</span><br><span class="line">  margin: 25px;</span><br><span class="line">  padding: 25px;</span><br><span class="line">  border: 5px solid black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义的width和height是content box的宽和高</p>
+<img src="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/standard-box-model.png">
+
+<p>在替代盒模型中，所有宽度都是可见宽度，所以内容宽度是该宽度减去边框和填充部分。使用上面相同的样式得到 (width &#x3D; 350px, height &#x3D; 150px).</p>
+<img src="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/alternate-box-model.png">
+
+<p>浏览器默认使用的是标准盒子模型，可以通过设置<code>box-sizing:border-box</code>来采用替代盒子模型。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">.box1 &#123;</span><br><span class="line">  box-sizing: content-box; /* 使用传统盒子模型 */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box2 &#123;</span><br><span class="line">  box-sizing: border-box; /* 使用 IE 盒子模型 */</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="三-定位"><a href="#三-定位" class="headerlink" title="(三)定位"></a>(三)定位</h3><p>定位是 CSS 的一个重要概念，用于定位页面中的元素。在 CSS 中，有三种定位方式：普通流定位（normal flow）、浮动定位（float）、绝对定位（absolute position）和固定定位（fixed position）。</p>
+<p><strong>普通流定位：</strong></p>
+<p>在普通流定位中，元素按照其在 HTML 中的位置自然排列，如文本一样从上到下、从左到右排列。不需要指定特殊的定位属性。当我们不对元素进行定位时，元素按照默认的普通流定位方式排列，这也被称为元素的自然文档流。</p>
+<p><strong>浮动定位：</strong></p>
+<p>浮动是一种脱离普通流的定位方式，通常用于实现文本环绕图片等效果。通过使用 float 属性，可以使元素向左或向右浮动，并使得该元素所在的其它元素环绕在其周围。</p>
+<p><strong>绝对定位：</strong></p>
+<p>绝对定位是一种相对于包含它的父元素（或根元素）定位的方式。通过使用 position 属性，可以将元素从普通流中脱离出来，并根据 top、right、bottom 和 left 对其进行定位。此外，通过 z-index 属性，还可以控制元素的层叠顺序。</p>
+<p><strong>固定定位：</strong></p>
+<p>固定定位是一种不受文档流影响，始终保持在屏幕上的定位方式。通过使用 position 属性，同时指定 top、right、bottom 和 left 属性，可以将元素固定在屏幕上，不随滚动条滚动。</p>
+<p>在定位方面，面试可能会问到以下问题：</p>
+<ol>
+<li>CSS 中有哪几种定位方式？它们有什么区别？</li>
+<li>什么是普通流定位？如何使用浮动定位、绝对定位和固定定位？</li>
+<li>定位会对文档流产生什么影响？</li>
+<li>如何控制定位元素的层叠顺序？</li>
+<li>什么是清除浮动？如何解决因浮动引起的文档流问题？</li>
+</ol>
+<p>以上问题只是面试中可能会涉及到的一部分，针对不同的公司、面试职位以及岗位级别，问题会有所不同。</p>
+<p>对文本流产生的影响：</p>
+<p>1.定位会对文档流产生什么影响？</p>
+<p>定位使用较多的是 absolute 和 fixed定位方式，而它们都会对文档流产生影响，不能像 float 定位方式一样自动腾出位置。</p>
+<p><strong>绝对定位</strong></p>
+<p>使得元素从文档流中脱离出来，不再占据原本的空间位置，可能会导致其它元素的位置发生变化。例如，当一个元素使用绝对定位时，如果它的位置和另一个元素重合，它就会盖在后者上面，可能会导致后者无法点击或编辑，从而影响用户的体验。</p>
+<p>如果使用绝对定位，因为绝对定位元素位置的相对性一般是以其父元素的左上角为参考，而父元素造成的偏移会让子元素的位置相对于文档产生偏移，通过调整父元素的定位使得子元素的定位可以比较集中与整体的设计。</p>
+<p><strong>固定定位:</strong></p>
+<p>使用 position 属性可以将元素固定在屏幕上，不受文档流的影响，始终呈现在浏览器窗口的某个位置。和绝对定位一样，我们可以使用 top、right、bottom、left 属性来确定元素的位置。为了实现屏幕滚动时元素的位置不变，还需要设置元素的 z-index 属性，使其在文档流中处于最顶层。</p>
+<p><strong>相对定位：</strong></p>
+<p>它可以使元素相对于它原本在文档流中的位置进行移动，但是不会完全脱离文档流。它不会像绝对定位那样脱离文档流，也不会像浮动那样影响网页的布局。在相对定位的方式下，可以使用 top、right、bottom 和 left 属性来定位元素的位置，这些属性描述的是元素相对于它原本在文档流中的位置进行移动的距离，且在进行相对定位时不会对其他元素产生影响，也不会改变元素本身的大小。</p>
+]]></content>
+      <categories>
+        <category>前端笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>前端笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>完成比完美更重要——记一次差点挂科的经历</title>
+    <url>/hexopp//2023/03/03/%E8%A2%AB%E6%89%80%E8%B0%93%E7%9A%84%E5%AE%8C%E7%BE%8E%E4%B8%BB%E4%B9%89%E6%90%9E%E5%88%B0%E5%B4%A9%E6%BA%83/</url>
+    <content><![CDATA[<p>上周终于考完了上学期要缓考的四科考试，度过了一个非常崩溃、内耗，又很失败的一周，最崩溃的一天从中午考到了晚上。虽然前一天特意通宵复习，但没用，到了考场看到试卷的那一刻，大脑完全空白，彻底失败。</p>
+<p>那一刻，证明了弯道超车真的胡扯。某一瞬间，脑子里不断重复：要是去年没缓考，在家网上考试多好！</p>
+<p>或许，我应该把这句话刻在我的墓志铭上提醒后代（要是有的话）：别缓考，假期前学不完的东西，假期后也一样。</p>
+<hr>
+<p>当时缓考的理由有这么几个：一是自己没复习好，想考好；二是自己想好好学，但在家考就可以用手机搜一搜啥的了，不必好好学了（； 三是自己当时阳了；综上，我毅然决然选择了缓考…..</p>
+<p>结果，唉，差点害死自己。</p>
+<p>教训是想考高分不一定要去完完全全了解这个学科的知识点，刷题背题就完了；</p>
+<p>下次有方便的路别再折腾自己了，拖延和内耗会不断的折磨自己，行动是解救自己的唯一良药。</p>
+<p>不完美的行动比不行动要强一百倍，不完美的计划也是计划，千万不要在脑子里想一遍又一遍到头来什么都没有了。</p>
+]]></content>
+      <categories>
+        <category>Essay</category>
+      </categories>
+      <tags>
+        <tag>Essay</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>集线器、交换机和路由器的区别</title>
+    <url>/hexopp//2023/02/26/%E8%B7%AF%E7%94%B1%E3%80%81%E4%BA%A4%E6%8F%9B%E6%A9%9F/</url>
+    <content><![CDATA[<hr>
+<p>集线器、交换机和路由器的区别（The differences bettwen Switch  Router and Hub）</p>
+<p>集线器（hub），当一台电脑发送给另一台电脑数据包时，所有端口上连接的电脑都能收到数据包，同时会造成网络的拥堵，极大浪费了带宽。</p>
+<p>hub that every computer connectd can received the  data packet.<br><img src="http://rqj9yukzg.hn-bkt.clouddn.com/%E8%B7%AF%E7%94%B11.jpg?e=1677403492&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:ZTtuXZ2Q0-Vu5DKRhZY75oHD8yI="></p>
+<p>交换机(switch)，与集线器类似，但更智能。可以解析每一台设备的ip地址（称为MAC 地址），只向特定端口的设备发送数据包。</p>
+<p><img src="
+http://rqj9yukzg.hn-bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230226165407.jpg?e=1677403050&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:ZnnZ-eQ9EK5-R4YFHhgti__TC_0="><br><img src="http://rqj9yukzg.hn-bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230226165416.jpg?e=1677402948&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:4EMJFk8Hk0oAeB8gijq-7YQSCZA="></p>
+<p>路由器，连接不同网络，可以理解成不同网络之间的大门（gateway）</p>
+<p><img src="
+http://rqj9yukzg.hn-bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230226165429.jpg?e=1677403008&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:nm5a4pjb4uwsH7Vwg9LIMzq3MrU="></p>
+<p>A router is a device that routes or fowards data from one network to another based on their IP address. When a data packet is received from the router,the router inspects the data’s IP address and determines if the packet was meant for its own network or if its meant for another network.</p>
+<p>If the routerdetermines that the data packet is meant for its own network,it receives it. But if it’s not meant for it’s own network, it sends it off to another network. </p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ChatGPT、研究生退学、农业与技术</title>
+    <url>/hexopp//2023/02/26/ChatGPT%E3%80%81%E7%A0%94%E7%A9%B6%E7%94%9F/</url>
+    <content><![CDATA[<p><em><strong>本打算在2.24号发出的，但各种原因，拖了又拖，到了2.26号。当时想表达的意思与心境早已快忘记了，但晚写总归比没有要强，于是我在一个阳光很好的午后，本该为下周到来的6科考试复习（我总是拧巴着拖延和逃避）时，坐在学校的山坡上，随便写点什么东西。</strong></em>  </p>
+<h3 id="研究生退学"><a href="#研究生退学" class="headerlink" title="研究生退学"></a>研究生退学</h3><p>先从研究生退学聊起吧。有些时候感觉自己讲了太多遍反而自己都有些烦了，姑且像祥林嫂那样再讲一遍：2022.2.24日，在普京调集他的军队入侵乌克兰的那天，1小时22分速通基辅（邵依古在平行世界里一战封神）的这天，在也是我研究生正式提交退学申请的这天。</p>
+<p>后来普京的军队在无数个1小时22分里都没有彻底拿下乌克兰，陷入了泥潭里。我退学后的境况竟和他们命运一样，在经过了数次“三个月自学完前端的计划”破产之后，我也没能实现退学前的预定目标。</p>
+<p>于是，在各种阴差阳错之后，我又幸运的重新回到了校园，读了一个计算机二学位。</p>
+<p>以上恰巧也发生在了我的二十四岁本命年中，我的人生轨迹似乎发生了变化。至于最终会偏向哪里，只能等后来看了。</p>
+<h3 id="ChatGPT"><a href="#ChatGPT" class="headerlink" title="ChatGPT"></a>ChatGPT</h3><p>最初想写一篇文章，其实主要是因某节课上所看教材有感。在2023年的今天，我们计算机的学生所看的教材，课本上的文件日期显示的竟然是2016年的，所用的软件也基本上是停止更新，被淘汰的。在谷歌上输入该软件，被问到的问题是：“Is xx  still used 2022?” </p>
+<p>若在农业的教科书中，教材十几年不变影响倒还不算大（毕竟基础学科变化不大），但计算机领域，几年的时间技术都会发生翻天覆地的变化。但学习一个被淘汰的软件，在这里成了一门必修课。</p>
+<p>btw，纠结这些实际意义也并没有多大的意义，只是限于了技术绝对论的谈论中了。总会有最新的技术，总会有最新的软件，淘汰旧的技术，或者”迷信技术的人“。（当然这是另一个方面了，总不能学淘汰的软件吧：）</p>
+<p>另一个感慨还是，一年前脑子里还是最原始的东西（这么说有点对不起农业），技术的另一端可能恰当一点，到了一年后，开始关注上了ChatGPT，用着最先进的人工智能。更好玩的是，前几天，用ChatGPT生成邮件帮助申请农学研究生的同学给导师发邮件。有种破次元壁的感觉，一年前还在实验室种小麦的人竟然用上了人工智能？</p>
+<p>其实问题的关键恐怕也不在于农业和技术，农业和计算机科学了，在一个资源相对匮乏的社会里，才会人吃人，或者说没得选。</p>
+<p>*<strong>不成熟的文字排列组合，满足一下快要消失的表达欲，亦或者仅仅是在被包围的冰冷技术中，寻找一点表达的自由同时在晒了一个多小时太阳的时候，留下一点痕迹罢了。</strong></p>
+<img src="http://rqj9yukzg.hn-bkt.clouddn.com/%E6%98%A5%E6%97%A5%E5%8D%88%E5%90%8E.jpg?e=1677403526&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:8FQyaH9BDkUoMnHyvRacrB1Q8rk=">]]></content>
+      <categories>
+        <category>Essay</category>
+      </categories>
+      <tags>
+        <tag>Essay</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用hexo？</title>
+    <url>/hexopp//2023/02/23/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hexo%EF%BC%9F/</url>
+    <content><![CDATA[<blockquote>
+<p>注：本文是在完成前期一系列初始化建立博客工作后，如何使用。 写本文原因主要是源于：我忘记怎么发文章了。</p>
+</blockquote>
+<hr>
+<p>1&#x2F;首先找到自己在电脑上创建的Blog的文件夹。</p>
+<p>(为防止我再一次忘记，这次直接将文件件放到了桌面。)</p>
+<p>2&#x2F;到所在文件夹后，鼠标右键点击“在终端中打开”</p>
+<p>3&#x2F;code . 命令可在vscode中打开，cd test进入博客中之前创建的文件夹</p>
+<p>4&#x2F;此时，可以继续在命令行中输入 hexo new “文章的标题” ，创建一篇新的post了，在vscode中打开就可以编辑。</p>
+<p>或者，直接在Typora中编辑好后，保存文件后将文件直接放到source&#x2F;_posts中即可。</p>
+<p>5&#x2F;以上步骤完成“从哪里打开——如何写”的步骤。<br>[新掌握的一个技巧从文章中插入图片]</p>
+<p><del>在source文件夹中创建images文件夹</del>[修改,需要直接在source文件夹中]，将需要的图片放进入，直接将图片拖入文章中，便可以自动设置路径。<br>但更好的方式应该是设置外部链接：</p>
+<p>6&#x2F;保存文章后，可以通过在命令行中hexo s命令启动本地的服务器进行预览，通过hexo g 生成网页，hexo d 部署网页到github。</p>
+<p>（因为在之前的配置中，设置好了网站的网址和仓库，所以可以一键自动部署）</p>
+<p>ps:最终图片上传的解决方式是采用了[贴图库]的外链方式。(<a href="http://www.tietuku.cn/">http://www.tietuku.cn/</a>)</p>
+<p>ps:注册了<a href="https://portal.qiniu.com/">七牛云平台</a></p>
+<p>更好用一些<br><img src = "http://rqj9yukzg.hn-bkt.clouddn.com/Q%29DC%60Z%5DS%5DN%5B0J~RH%7DMNVE%7BR.jpg?e=1677155921&token=YE8xrE2EDc07Ff46RE8bjc4F0w0dFLvp_XcOlKWm:fk0fYjm8rdLxGNOubb54qWMiwqQ="></p>
+]]></content>
+      <categories>
+        <category>-Hexo -Notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How do you trick your brain into doing difficult things</title>
+    <url>/hexopp//2023/02/09/dopamine/</url>
+    <content><![CDATA[<h1 id="How-do-you-trick-your-brain-into-doing-difficult-things"><a href="#How-do-you-trick-your-brain-into-doing-difficult-things" class="headerlink" title="How do you trick your brain into doing difficult things"></a>How do you trick your brain into doing difficult things</h1><p>You probably don’t have a problem playing video games or browsing social media on your phone. In fact I have no doubt you could sit in front of a screen and do both of those activities for 2 hours,or enev longer without breaking your concentration.</p>
+<p> But what about half an hour of studying?  Ops! That might too hard.How about working on your side business for another hour? Huum.Doesn’t sound too appealing. Even though you logically know that studying,exercising,building a busniss or something equally productive will bring you more things in the long run, you’ll still prefer watching TV,playing video games and scrolling through social media. One might argue that it’s obvious why. One activity is easy and doesn’t require much effort,while the other activity is difficult.. and it’s requires you to apply yourself.</p>
+<p>But some people seem to have no problem studying,exercising or woring on their side projects,regularly.Which begs the question: Why some people more motivated to tackle difficult things? And is there a way to make doing difficult things easy?</p>
+<p>To answer this question,we need to look at this brain neurotransmitter:Dopamine. Dopamine is often considered a pleasure moloculd. But that’s not quite what it does. Dopamine is what make us desire things. And it’s that desire that gives us the motivation to get up and do stuff. If you not sure how powerful dopamine is,let me introduce you to a few experiments neuroscientists did on rats.</p>
+<p>The researchers implanted electrodes in the brains of rats. Whenever the rat pulled a lever,the researchers stimulated the rat’s reward system in the brain. The result was that the rats developed a craving so stron, they kept pulling the lever, over and over for hours. The rats would refuse to eat or even sleep. They would just keep pressing the lever until they would drop from exhaustion.</p>
+<p>But then the process was reversed. The researchers blocked the release of  dopamine in the brain’s reward center. As a result,rats became so lethargic that even getting up to get a drink of water was not worth the effort. They would’t eat. They didn’t want to mate. They didn’t crave anything at all. You could say that rats lost all will to live. </p>
+<p>However, if food was placed directly in their miuths, the rats would still eat and enjoy the food. They just didn’t have the motivationg to get up and do it themselves.</p>
+<p>You would think that it’s thirst or hunger that motivates us get food or water. But there’s alse dopamine that plays a key role here. Those rats experients might be extreme cases. But you can see similar effects dopamine has in humans and in our daily lives. </p>
+<p>In fact, your brain develops priorities in large part based on how much dopamine it’s expecting to get. If an activity releases too little dopamine, you won’t have much motivation to do it.  But if an activity release a lot of dopamine, you’ll be motivited to repeat it over and over.</p>
+<p>So which behaviors release dopamine?Any activity where you anticipate there’s a potential reward release it. But if you know there are no immediate rewards with the behavior, your brain won’t release it. For example,before you eat comfort food, your brain release dopamine, because you anticipate that the food will make you feel good. Even if it actually makes you feel worse. That’s because your brarin doesn’t even care if the high dopaminer activity is damaging to you. It just wants more of it.</p>
+<p>A streetypical example would be someone who’s a drug addict. He knows that what he’s doing is not good for him. But all he wants is to get more of that drug. Besides getting you high,cocaine and heroin release unnatural amounts of dopamine,which in turn makes you crave them even more.</p>
+<p>Of course, it has to be noted that nearly evewrything releases some amounts of dapamine. Even drinking water when you’re thirsty does.</p>
+<p>But the hightest dopamine release happens when you get a reward randomly. One such example is playing on a slot machine in a casino.Even if you’ve only been losing money until that point, you eventually expect to get a bigger reward. You just don’t know when it could happen.</p>
+<p>And in today’s digital society, we are flooding our brarins with unnaturally high amounts of dapamine in a daily basis, even if we don’t know it.</p>
+<p>Some examples of high dopamine behaviors include:scrolling through social media websites,playing video games,watching internet pornography,etc. We anticipate some sort of reward with each one of those behaviors. That’s why we’re constantly checking our phones. We expect tp see a text message or some other notification. And we know that eventuallt we’re going to receive it. We’re becoming like those rats pulling the lever,try to get a new dopamine hit.</p>
+<p>And you might think,”Oh so what?  It’s not like it’s harming me in any way.”</p>
+<p>But you’d be wrong.Our badies have a biological system called homeostasis. It means our body likes to keep internal physical and chemical conditions at a balance level.Whenever an imbalance occurs,our body adapts to it.</p>
+<p>Let me give you an example: When it’s cold outside, our body temperature falls. And as a result,we start shivering to generate heat and warm the body. However,when it’s hot outside, our body temperature rises. And we start sweating to lose some of that heat. Esentially our body is looking to maintain a temperature of around 37degrees Celsius no matter what.</p>
+<p>But there is another way homeostasis manifests itself. And that is through tolerance. </p>
+<p>You body tries to maintain homeostasis, so it down-regulates your dopamine receptors. Essentially your brarins gets used to having high levels of dopamine and those levels become your new normal. Thus you develop a dopamine tolerance. This can be a huge problem, because the things that don’t give you as much dopamine, don’t interest you any longer. And it’s much more difficult to motivate yourself to do them. They feel boring and less fun,because they don’t release as much dopamine, compared to the things that do release it in high amounts.</p>
+<p>That’s why people tend to prefer playing video games or browsing the internet, compared to studying or working on their business. Video games make us feel good and comfortable, as they release a lot of dopamine.</p>
+<p>Sadly things like working hard or reading ,releases it in lower amounts. This is one of the reasons why drug addicts who try to quit have a hard time adjusting to a normal life. Their dopamine tolerance gets so high that normal life isn’t able to match it. They become like those rats from previous experiments who have no motivation to do anything if there’s not enough dopamine release.</p>
+<p>And it’s not just drug addicts. People who are addicted to video games,social media or internet pornpgraphy experience the same thing. Once their dopamine tolerance gets too high,they simply aren’t able to enjoy low dopamine behaviors.</p>
+<p>Which begs the question: Is there anything that can be done to prevent this?</p>
+<p>The answer is you need to perform a dopamine detox. By now you might already have an idea what dopamine detox is going to look like.</p>
+<p>What you’re going to do is set aside a day,where you’re going to aviod all the highly stimulating activities. You’re going to stop flooding your brain with high amounts of dopamine and you’re going to let your dopamine receptors recover.</p>
+<p>For one whole day you will try to have as little fun as possible.</p>
+<p>You won’t be using the internet,or any technology like your phone or computer.You’re not allowed to listen to music,you’re not allowed to masturbate or eat junk food. Basically you’re going to remove all sources of external pleasure for the entire day.</p>
+<p>You’re going to embrace boredom. And trust me,there will be a lot boredom.</p>
+<p>You are however allowed to do the following:Go for a walk.Meditate and be along with your thoughts. Reflect on your life and goals. Write down any ideas you get. Not on your computer or your phone, but on a physical piece of paper.</p>
+<p>All of this might seem quite intense. But if you want radical results and you want them fast, you need to able to take radical action. Now you might be asking yourself: Why would this even work？</p>
+<p>You can think of it in this way. Let’s say that you’re been eating every single meal at the best restaurant in your town. As a result, what happened is thatthose fancy meals became your normal. If someone offered you a bowl of plain rice, you would probably refuse. It simply wouldn’t taste as good as your usual restaurant meal.</p>
+<p>But if you suddenly find yourself stranded on a deserted island and you’re starving, suddenly that bowl of plain rice doesn’t seem so bad. And that is what the dopamine detox does. It starves you of all the pleasure you usually get, and in turn, it makes those less statisfying activities more desirable.</p>
+<p>To put simply:Dopamine dotox works because you become so bored, that boring stuff becomes more fun.</p>
+<p>Now if you don’t want to take such extreme action and starve yourself of all the pleasure, you can perform a smaller dopamine detox. You’re going to pick one day of the week, where you’re going to refrain from one of your high dopamine behaviors completely.</p>
+<p>Whatever that behaviors might be. Mabye checking your phone all the time,playing viedo games on your computer,binge watching TV,eating junk food, watching internet pornography,whatever.</p>
+<p>And from now on,every single week for one whole day,you’re going to avoid that activity. You can still do other things,but the beheavior you pick is off limits.</p>
+<p>Yes, you may feel slightly bored,but that’s the point. You want to let your depamine receptors recover from the unnaturally high dopamine that’s been flooding your brain. And boredom is going to propel you to do other things that day. Things that you would normally put off,because they don’t release as much dopamine. And because you’re bored ,it’s easier for you to do them.</p>
+<p>Of course avoiding high dopamine behaviors once in a while is good.But ideally you should avoid those behaviors altogether, or at least as much as possible. Instead you want to connect more dopamine to the things that will actually benefit you. And what i found is that your current high dopamine activities can serve as an incentive to pursue things that actually give you those long term benefits.</p>
+<p>In other word, you could use your high dopamine activity as a reward for completing difficult work. And this is exactly what I do myself.</p>
+<p>I track all the difficult low dopamine work i do.Cleaning my apartment,practicing the piano,reading books, doing some sort of exercise, creating these video,etc. After i’m able to get a certain amount of work done, i reward myself with some amount of high dopamine activity at the end of day.</p>
+<p>The key words here are:after,and ,at the end of the day.</p>
+<p>If i indulge in high dopamine behavior first, then i ‘m not going to feel like doing the low dopamine work. I’m simply not going to be motivited enough. So i always start with the difficult things, only then i allow myself to indulge in highj dopamine activities.</p>
+<p>To give you an example: For every completed hour of low dopamine work, i reward myself with 15 minutes of high dopamine behavior at the end of the day. That means that for 8 hours of low dopamine, i allow myself roughly 2 hours of high dopamine behavior. </p>
+<p>Of course,these are my ratios. You can tweak them to your liking. Also it has to be noted that if you are addicted to something that’s damaging to your health, then you don’t want to treat that behavior as a reward. Instead find a different reward that’s not as damaging. One you still think is worth the effort.</p>
+<p>And if you’re windering whatmy guilty pleasure is, it’s the internet. I can easily get lost there for hours without doing anything else. That’s why i have this system. It’s so i’m able to control my addiction. But make no mistake, even with this system, i still plan days where i abstain from high dopamine activities completely.</p>
+<p>To conclude this article i want to say that it is possible to make doing difficult things feel easier. But when your brain is getting so much dopamine all the time,you won’t be as excited about working on something that doesn’t release much of it. That’s why you might want to limit your phone and computer usage,along with other high dopamine releasing behavior. And i can tell you that it’s definitely worth it. So if you have motivation problems, start dopamine detoxing your brains as soon as possible. Separate yourself from the unnaturally high amounts of dopamine, or at least expose yourself to it far less frequently. </p>
+<p>Only then will normal, everyday,low dopamine activities become exciting again and you’ll be able to do them for longer. we are all dopamine addicts to a certain extent.  And that’s  a good thing, because dopamine motivates us to achieve our goals and improve ourselves.</p>
+<p>But it’s up to you to decide where you’re going to get your dopamine from. Are you going to get it from things that don’t benefit you? Or are you going to get it from working on your long term goals? </p>
+<p>The choice is yours. </p>
+<hr>
+<blockquote>
+<p>Thank you for reading here! congratulation! </p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Essay</category>
+      </categories>
+      <tags>
+        <tag>Essay</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown</title>
+    <url>/hexopp//2023/02/09/Markdown/</url>
+    <content><![CDATA[<h1 id="markdown-语法"><a href="#markdown-语法" class="headerlink" title="markdown 语法"></a>markdown 语法</h1><h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h3 id="标题三"><a href="#标题三" class="headerlink" title="标题三"></a>标题三</h3><h4 id="标题四"><a href="#标题四" class="headerlink" title="标题四"></a>标题四</h4><h5 id="标题五"><a href="#标题五" class="headerlink" title="标题五"></a>标题五</h5><hr>
+<p>** 这是斜体 **</p>
+<p><del>这是横线</del></p>
+<blockquote>
+<p>引用<a href="https://markdown-zh.readthedocs.io/">https://markdown-zh.readthedocs.io/</a></p>
+</blockquote>
+<p><code>    内嵌代码  &lt;h1&gt;hello world!&lt;/h1&gt;</code></p>
+<ul>
+<li>green</li>
+<li>yellow</li>
+<li>red</li>
+<li>white</li>
+<li>blue</li>
+</ul>
+<ol>
+<li>foo</li>
+<li>boo</li>
+<li>z</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码块</span><br><span class="line"></span><br><span class="line">&lt;p&gt;hello,world&lt;p&gt;</span><br><span class="line">&lt;p&gt;hello,world&lt;p&gt;</span><br><span class="line">&lt;p&gt;hello,world&lt;p&gt;</span><br><span class="line">&lt;p&gt;hello,world&lt;p&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>-Hexo -Notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World ！</title>
+    <url>/hexopp//2023/02/09/hello-world/</url>
+    <content><![CDATA[<pre><code>   Welcome to my world ! 
+</code></pre>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1314353013&auto=1&height=66"></iframe>]]></content>
+  </entry>
+</search>
